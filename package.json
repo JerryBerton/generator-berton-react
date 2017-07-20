@@ -13,7 +13,7 @@
   ],
   "main": "generators/index.js",
   "keywords": [
-    "",
+    "mobx",
     "yeoman-generator"
   ],
   "devDependencies": {
@@ -46,6 +46,6 @@
       "node": true
     }
   },
-  "repository": "JerryBerton/generator-test",
+  "repository": "git@github.com:JerryBerton/generator-mobx-react.git",
   "private": true
 }
