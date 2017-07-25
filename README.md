@@ -3,7 +3,7 @@
 
 ## 安装
 
-First, install [Yeoman](http://yeoman.io) and generator-test using [npm](https://www.npmjs.com/) (we assume you have pre-installed [node.js](https://nodejs.org/)).
+首先安装 [Yeoman](http://yeoman.io)和 generator-berton-react [npm](https://www.npmjs.com/)  [node.js](https://nodejs.org/)).
 
 ```bash
 npm install -g yo
