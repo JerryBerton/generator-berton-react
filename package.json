@@ -1,7 +1,7 @@
 {
-  "name": "generator-mobx-react",
-  "version": "0.0.0",
-  "description": "",
+  "name": "generator-berton-react",
+  "version": "1.0.1",
+  "description": "this is generator-berton-react",
   "homepage": "",
   "author": {
     "name": "jerryberton",
@@ -13,7 +13,10 @@
   ],
   "main": "generators/index.js",
   "keywords": [
+    "react",
+    "redux",
     "mobx",
+    "generator-berton-react",
     "yeoman-generator"
   ],
   "devDependencies": {
@@ -46,6 +49,6 @@
       "node": true
     }
   },
-  "repository": "git@github.com:JerryBerton/generator-mobx-react.git",
+  "repository": "git@github.com:JerryBerton/generator-berton-react.git",
   "private": true
 }
