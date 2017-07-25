@@ -7,13 +7,13 @@ First, install [Yeoman](http://yeoman.io) and generator-test using [npm](https:/
 
 ```bash
 npm install -g yo
-npm install -g generator-test
+npm install -g generator-berton-react
 ```
 
 Then generate your new project:
 
 ```bash
-yo test
+yo berton-react
 ```
 
 ## Getting To Know Yeoman
