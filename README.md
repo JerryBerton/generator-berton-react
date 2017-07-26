@@ -1,27 +1,27 @@
 # generator-berton-react [![NPM version][npm-image]][npm-url] [![Build Status][travis-image]][travis-url] [![Dependency Status][daviddm-image]][daviddm-url] [![Coverage percentage][coveralls-image]][coveralls-url]
 > 
 
-## Installation
+## 安装
 
-First, install [Yeoman](http://yeoman.io) and generator-test using [npm](https://www.npmjs.com/) (we assume you have pre-installed [node.js](https://nodejs.org/)).
+首先安装 [Yeoman](http://yeoman.io)和 generator-berton-react [npm](https://www.npmjs.com/)  [node.js](https://nodejs.org/).
 
 ```bash
 npm install -g yo
 npm install -g generator-berton-react
 ```
 
-Then generate your new project:
+生成项目目录:
 
 ```bash
 yo berton-react
+npm start // 启动项目 默认端口 3000
 ```
+在生成项目同时可以选择redux环境或者mobx环境。会自动生成选择的todo list的DEMO
+## 版本介绍
 
-## Getting To Know Yeoman
-
- * Yeoman has a heart of gold.
- * Yeoman is a person with feelings and opinions, but is very easy to work with.
- * Yeoman can be too opinionated at times but is easily convinced not to be.
- * Feel free to [learn more about Yeoman](http://yeoman.io/).
+ * react: v15.6.1
+ * react-dom v15.6.1
+ * react-router-dom v4.1.2.
 
 ## License
 
