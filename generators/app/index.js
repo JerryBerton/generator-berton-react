@@ -6,11 +6,12 @@ const yosay = require('yosay');
 module.exports = class extends Generator {
 
   prompting() {
+    this.log(chalk.yellow("**********************************************************"));
     // Have Yeoman greet the user.
     let greetWord = 'Welcome to Use ' + chalk.red.bold('generator-berton-react') + ' ' +
       chalk.blue('JerryBerton ');
     this.log(yosay(greetWord));
-
+    this.log(chalk.yellow("**********************************************************"));
     const prompts = [
       {
         type: 'input',
@@ -105,7 +106,13 @@ module.exports = class extends Generator {
       this.destinationPath('src/index.html')
     )
   }
-  // // install() {
-  // //   this.installDependencies();
-  // }
+  install() {
+    this.installDependencies({
+      bower: false,
+      npm: true,
+      yarn: true
+    }, () => {
+
+    });
+  }
 };
