@@ -1,6 +1,6 @@
 {
   "name": "generator-berton-react",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "Based on the react of webpack project generator, can undertake collocation choose redux or mobx",
   "homepage": "https://jerryberton.github.io",
   "author": {
