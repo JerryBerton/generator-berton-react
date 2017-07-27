@@ -1,0 +1,32 @@
+html, body {
+  margin: 0;
+  padding: 0;
+  background-color: #fff;
+}
+
+#root {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  padding: 40px 0;
+}
+.layout-greet {
+  background: red;
+}
+.demo-list {
+  padding: 16px;
+  border: 1px solid #d2eafb;
+  background-color: #ecf6fd;
+  &-item {
+    height: 32px;
+    width: 80%;
+    margin: 10px auto;
+    border-radius: 4px;
+    background-color: #fff;
+    padding: 0 4px;
+    border: 1px dashed #d9d9d9;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+}

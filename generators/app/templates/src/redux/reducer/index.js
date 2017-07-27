@@ -5,7 +5,7 @@ const todo = (state = [], action) => {
     case 'TODO_LIST_ADD':
       return [
         ...state,
-        action.text
+        action.record
       ]
     case 'TODO_LIST_REMOVE':
       return [

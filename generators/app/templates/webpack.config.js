@@ -9,9 +9,10 @@ const {
  } = require('@webpack-blocks/webpack2')
 const babel = require('@webpack-blocks/babel6')
 const devServer = require('@webpack-blocks/dev-server2')
-const postcss = require('@webpack-blocks/postcss')
-const autoprefixer = require('autoprefixer');
-const HtmlWebpackPlugin = require('html-webpack-plugin');
+
+const sass = require('@webpack-blocks/sass')
+const autoprefixer = require('autoprefixer')
+const HtmlWebpackPlugin = require('html-webpack-plugin')
 
 const entry = './src/main.js'; // 入口文件
 const output = './build/bundle.js' // 输出文件
@@ -44,9 +45,7 @@ module.exports = createConfig([
   babel({
     exclude: /\/node_modules\//
   }),
-  postcss([
-    autoprefixer({ browsers: ['last 2 versions'] })
-  ]),
+  sass(),
   addPlugins(plugins),
   defineConstants({
     'process.env.NODE_ENV': process.env.NODE_ENV

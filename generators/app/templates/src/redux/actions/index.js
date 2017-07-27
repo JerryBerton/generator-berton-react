@@ -1,7 +1,7 @@
-export const add = (text) => {
+export const add = (record) => {
   return {
     type: 'TODO_LIST_ADD',
-    text
+    record
   }
 }
 export const remove = (index) => {

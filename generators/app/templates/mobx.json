@@ -13,7 +13,7 @@
   "devDependencies": {
     "@webpack-blocks/babel6": "^0.4.1",
     "@webpack-blocks/dev-server2": "^0.4.0",
-    "@webpack-blocks/postcss": "^0.4.3",
+    "@webpack-blocks/sass": "^0.4.1",
     "@webpack-blocks/webpack2": "^0.4.0",
     "babel-core": "^6.25.0",
     "babel-loader": "^7.1.1",
@@ -22,10 +22,10 @@
     "babel-preset-env": "^1.6.0",
     "babel-preset-react": "^6.24.1",
     "babel-preset-stage-1": "^6.24.1",
-    "html-webpack-plugin": "^2.29.0",
-    "react-redux": "^5.0.5"
+    "html-webpack-plugin": "^2.29.0"
   },
   "dependencies": {
+    "antd": "^2.12.2",
     "mobx": "^3.2.1",
     "mobx-react": "^4.2.2",
     "react": "^15.6.1",

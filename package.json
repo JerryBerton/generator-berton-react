@@ -1,12 +1,12 @@
 {
   "name": "generator-berton-react",
   "version": "1.0.2",
-  "description": "this is generator-berton-react",
-  "homepage": "",
+  "description": "Based on the react of webpack project generator, can undertake collocation choose redux or mobx",
+  "homepage": "https://jerryberton.github.io",
   "author": {
     "name": "jerryberton",
     "email": "470665207@qq.com",
-    "url": ""
+    "url": "https://jerryberton.github.io"
   },
   "files": [
     "generators"
@@ -16,6 +16,7 @@
     "react",
     "redux",
     "mobx",
+    "webpack",
     "generator-berton-react",
     "yeoman-generator"
   ],
@@ -49,6 +50,9 @@
       "node": true
     }
   },
+  "bugs": {
+    "url": "https://github.com/JerryBerton/generator-berton-react/issues"
+  },
   "repository": "git@github.com:JerryBerton/generator-berton-react.git",
-  "private": true
+  "private": false
 }

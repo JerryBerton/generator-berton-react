@@ -8,7 +8,13 @@
   ],
   "plugins": [
     "react-hot-loader/babel",
-    "transform-decorators-legacy"
+    "transform-decorators-legacy",
+    [
+      "import", {
+        "libraryName": "antd",
+        "style": "css"
+      }
+    ]
   ],
   "env": {
     "development": {

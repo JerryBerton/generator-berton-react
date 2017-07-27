@@ -16,7 +16,7 @@ module.exports = class extends Generator {
         type: 'input',
         name: 'name',
         message : 'Your project name',
-        default: 'generator-berton-react'
+        default: 'berton-test'
       },
       {
         type: 'input',
@@ -38,7 +38,7 @@ module.exports = class extends Generator {
       },
       {
         type: 'list',
-        name: 'option',
+        name: 'relay',
         message: 'The state of data management framework',
         choices: ['redux', 'mobx']
       }
@@ -47,10 +47,23 @@ module.exports = class extends Generator {
       this.props = props;
     });
   }
-  writing() {
-    const option = this.props.option;
+  writingBasic() {
     this.fs.copyTpl(
-      this.templatePath(`${option}/package.json`),
+      this.templatePath('README.md'),
+      this.destinationPath('README.md'),
+      {
+        name: this.props.name
+      }
+    );
+    this.fs.copyTpl(
+      this.templatePath('.babelrc'),
+      this.destinationPath('.babelrc')
+    )
+  }
+  writingPackage() {
+    const relay = this.props.relay;
+    this.fs.copyTpl(
+      this.templatePath(`${relay}.json`),
       this.destinationPath('package.json'),
       {
         name: this.props.name,
@@ -59,24 +72,40 @@ module.exports = class extends Generator {
         author: this.props.author,
       }
     );
+  }
+  writingWebpack() {
     this.fs.copy(
-      this.templatePath('public/webpack.config.js'),
+      this.templatePath('webpack.config.js'),
       this.destinationPath('webpack.config.js')
     );
-    this.fs.copy(
-      this.templatePath('public/.babelrc'),
-      this.destinationPath('.babelrc')
+  }
+  writingMain() {
+    const relay = this.props.relay;
+    this.fs.copyTpl(
+      this.templatePath('src/main.js'),
+      this.destinationPath('src/main.js'),
+      {
+        relay
+      }
     );
     this.fs.copy(
-      this.templatePath(`${option}/src`),
+      this.templatePath(`src/${relay}`),
       this.destinationPath('src')
-    );
+    )
+  }
+  writingStyle() {
     this.fs.copy(
-      this.templatePath('public/index.html'),
+      this.templatePath(`src/styles/index.scss`),
+      this.destinationPath('src/styles/index.scss')
+    );
+  }
+  writing() {
+    this.fs.copy(
+      this.templatePath('src/index.html'),
       this.destinationPath('src/index.html')
     )
   }
-  install() {
-    this.installDependencies();
-  }
+  // // install() {
+  // //   this.installDependencies();
+  // }
 };
