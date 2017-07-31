@@ -4,7 +4,6 @@ const HtmlWebpackPlugin = require('html-webpack-plugin')
 const BUILD_PATH = path.resolve(__dirname, 'build') // 项目构建目录
 const BASE_PATH = path.join(__dirname, "src") //本地服务器所加载的页面所在的目录
 let  ENV = process.env.NODE_ENV;
-console.log('logis', ENV)
 module.exports = {
   context: path.resolve(__dirname, 'src'),
   entry: './index.js',
@@ -48,5 +47,5 @@ module.exports = {
      open: false,
      inline: true, //实时刷新
      port: 8090
- },
+  },
 }

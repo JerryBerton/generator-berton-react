@@ -23,7 +23,6 @@ export default class Layout extends Component{
         extra={extra}
       >
         {this.props.children}
-
       </Card>
     )
   }

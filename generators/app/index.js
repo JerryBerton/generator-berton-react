@@ -36,7 +36,7 @@ module.exports = class extends Generator {
         type: 'input',
         name: 'repository',
         message : 'Your project git repository url',
-        default: ''
+        default: ' '
       }, {
         type: 'list',
         name: 'relay',
@@ -86,6 +86,10 @@ module.exports = class extends Generator {
         options: { name: this.props.name },
         copy: true
       }, {
+          tPath: 'webpack.config.js',
+          dPath: 'webpack.config.js',
+          copy: true
+        }, {
         tPath: '.babelrc',
         dPath: '.babelrc',
         copy: true
@@ -96,6 +100,11 @@ module.exports = class extends Generator {
       }, {
         tPath: 'src/index.html',
         dPath: 'src/index.html',
+        copy: true
+      }, {
+        tPath: 'src/index.js',
+        dPath: 'src/index.js',
+        options: { relay: this.props.relay },
         copy: true
       }, {
         tPath: 'src/styles/index.scss',
@@ -139,12 +148,12 @@ module.exports = class extends Generator {
     })
   }
   install() {
-    // this.installDependencies({
-    //   bower: false,
-    //   npm: true,
-    //   yarn: true
-    // }, () => {
-    //
-    // });
+    this.installDependencies({
+      bower: false,
+      npm: true,
+      yarn: false
+    }, () => {
+      this.log('node_moudles is end , please run:', 'npm start');
+    });
   }
 };
