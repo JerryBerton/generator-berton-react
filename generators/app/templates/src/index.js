@@ -41,8 +41,7 @@ const root = document.getElementById('root')
 render(renderApp(), root)
 
 if (module.hot) {
-  module.hot.accept('components/Layout', () => {
-    require('components/Layout')
+  module.hot.accept(renderApp(), () => {
     render(renderApp(), root)
   })
 }

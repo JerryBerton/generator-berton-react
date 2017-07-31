@@ -1,59 +1,52 @@
-const {
-  createConfig,
-  defineConstants,
-  env,
-  addPlugins,
-  entryPoint,
-  setOutput,
-  sourceMaps
- } = require('@webpack-blocks/webpack2')
-const babel = require('@webpack-blocks/babel6')
-const devServer = require('@webpack-blocks/dev-server2')
-
-const sass = require('@webpack-blocks/sass')
-const autoprefixer = require('autoprefixer')
+const webpack = require('webpack')
+const path = require('path')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
-
-const entry = './src/main.js'; // 入口文件
-const output = './build/bundle.js' // 输出文件
-const plugins = [
-  new HtmlWebpackPlugin({
+const BUILD_PATH = path.resolve(__dirname, 'build') // 项目构建目录
+const BASE_PATH = path.join(__dirname, "src") //本地服务器所加载的页面所在的目录
+let  ENV = process.env.NODE_ENV;
+console.log('logis', ENV)
+module.exports = {
+  context: path.resolve(__dirname, 'src'),
+  entry: './index.js',
+  output: {
+    library: "jerryberton",
+    libraryTarget: "umd",
+    path: BUILD_PATH,
+    filename: "bundle.js",
+    auxiliaryComment: "jeryberton-test"
+  },
+  module: {
+    rules: [{
+      test: /\.(js|jsx)$/,
+      exclude: /node_modules/,
+      enforce: 'pre',
+      loader: 'eslint-loader'
+    }, {
+      test: /\.(js|jsx)$/,
+      exclude: /node_modules/,
+      loader: 'babel-loader',
+    }, {
+      test: /\.(css|scss|less)$/,
+      use: ['style-loader', 'css-loader?sourceMap', 'sass-loader?sourceMap']
+    }]
+  },
+  plugins: [
+    new HtmlWebpackPlugin({
       title: 'Jerryberton-React',
       inject: true,
-      template: './src/index.html'
-  })
-];
-// webpack devServer config
-const devServerConfig = {
-  port: 3000,
-  contentBase: 'src',
-};
-// webpack devServer proxy
-const devServerProxy = {
-  '/api': { target: 'http://localhost:3000' }
-};
-
-const resolveModules = modules => () => ({
+      template: 'index.html'
+    }),
+    new webpack.HotModuleReplacementPlugin()
+  ],
   resolve: {
-    modules: [].concat(modules, ['node_modules']),
+    modules: [path.resolve(__dirname, 'src'), 'node_modules']
   },
-})
-
-module.exports = createConfig([
-  entryPoint(entry),
-  setOutput(output),
-  babel({
-    exclude: /\/node_modules\//
-  }),
-  sass(),
-  addPlugins(plugins),
-  defineConstants({
-    'process.env.NODE_ENV': process.env.NODE_ENV
-  }),
-  resolveModules('src'),
-  env('development', [
-    devServer(devServerConfig),
-    devServer.proxy(devServerProxy),
-    sourceMaps()
-  ])
-])
+  devServer: {
+     contentBase:  BASE_PATH,
+     historyApiFallback: true,
+     hot: true,
+     open: false,
+     inline: true, //实时刷新
+     port: 8090
+ },
+}
