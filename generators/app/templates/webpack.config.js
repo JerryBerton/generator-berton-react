@@ -30,14 +30,6 @@ module.exports = {
     }, {
       test: /\.(css|scss|less)$/,
       use: ['style-loader', 'css-loader?sourceMap', 'sass-loader?sourceMap']
-    }, {
-      test: /\.(png|jpg)$/,
-      loader: 'url-loader?limit=8192&name=[name]_[hash:6].[ext]'
-    }, {
-      loader: 'file-loader',
-      options: {
-        name: '[sha512:hash:base64:7].[ext]'
-      }
     }]
   },
   plugins: [
