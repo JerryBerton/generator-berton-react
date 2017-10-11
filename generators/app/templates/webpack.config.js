@@ -1,9 +1,12 @@
 const webpack = require('webpack')
 const path = require('path')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
-const BUILD_PATH = path.resolve(__dirname, 'build') // 项目构建目录
-const BASE_PATH = path.join(__dirname, "src") //本地服务器所加载的页面所在的目录
+
+const BUILD_PATH = path.resolve(__dirname, 'build')
+const BASE_PATH = path.join(__dirname, "src")
 let  ENV = process.env.NODE_ENV;
+let PORT = 8080
+
 module.exports = {
   context: path.resolve(__dirname, 'src'),
   entry: './index.js',
@@ -27,25 +30,38 @@ module.exports = {
     }, {
       test: /\.(css|scss|less)$/,
       use: ['style-loader', 'css-loader?sourceMap', 'sass-loader?sourceMap']
+    }, {
+      test: /\.(png|jpg)$/,
+      loader: 'url-loader?limit=8192&name=[name]_[hash:6].[ext]'
+    }, {
+      loader: 'file-loader',
+      options: {
+        name: '[sha512:hash:base64:7].[ext]'
+      }
     }]
   },
   plugins: [
     new HtmlWebpackPlugin({
       title: 'Jerryberton-React',
-      inject: true,
+      inject: false,
       template: 'index.html'
+    }),
+    new webpack.ProvidePlugin({
+      cfgs: path.resolve(__dirname, 'src/cfgs/' + (process.env.NODE_ENV || "dev"))
     }),
     new webpack.HotModuleReplacementPlugin()
   ],
   resolve: {
-    modules: [path.resolve(__dirname, 'src'), 'node_modules']
+    modules: [path.resolve(__dirname, 'src'), 'node_modules'],
+    extensions: ['.web.js', '.js', '.json']
   },
   devServer: {
-     contentBase:  BASE_PATH,
-     historyApiFallback: true,
-     hot: true,
-     open: false,
-     inline: true, //实时刷新
-     port: 8090
+    contentBase:  BASE_PATH,
+    historyApiFallback: true,
+    hot: true,
+    open: false,
+    inline: true, //实时刷新
+    port: PORT
   },
+  devtool: 'source-map'
 }

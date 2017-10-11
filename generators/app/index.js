@@ -4,12 +4,12 @@ const chalk = require('chalk');
 const yosay = require('yosay');
 const relayOption = {
     mobx: {
-      "mobx": "^3.2.2",
-      "mobx-react": "^4.2.2",
+      "mobx": "^3.3.1",
+      "mobx-react": "^4.3.3",
     },
     redux: {
-      "redux": "^3.7.2",
-      "react-redux": "^5.0.5"
+      "react-redux": "^5.0.6",
+      "redux": "^3.7.2"
     }
   }
 module.exports = class extends Generator {
@@ -17,7 +17,7 @@ module.exports = class extends Generator {
     this.log(chalk.yellow("**********************************************************"));
     // Have Yeoman greet the user.
     let greetWord = 'Welcome to Use ' + chalk.red.bold('generator-berton-react') + ' ' +
-      chalk.blue('JerryBerton ');
+      chalk.blue('JerryBerton');
     this.log(yosay(greetWord));
     this.log(chalk.yellow("**********************************************************"));
   }
@@ -25,27 +25,32 @@ module.exports = class extends Generator {
     const prompts = [{
         type: 'input',
         name: 'name',
-        message : 'Your project name',
-        default: 'berton-test'
+        message : 'Initialize the name of the project',
+        default: 'react-demo'
       }, {
         type: 'input',
         name: 'author',
-        message : 'Your project author',
+        message : 'The author of the project build',
         default: 'JerryBerton'
       }, {
         type: 'input',
         name: 'repository',
-        message : 'Your project git repository url',
+        message : 'Git repository url of the project',
         default: ' '
       }, {
         type: 'list',
         name: 'relay',
-        message: 'The state of data management framework',
+        message: 'The choice of state management library, Redux or Mobx',
         choices: ['redux', 'mobx']
       }, {
         type: 'confirm',
-        name: 'eslint',
-        message: 'would you like to enable this option for Eslint ?',
+        name: 'gitignore',
+        message: 'Generate gitignore files ?',
+        default: true
+      }, {
+        type: 'confirm',
+        name: 'readme',
+        message: 'Whether to generate the README file ?',
         default: true
       }
     ];
@@ -54,7 +59,7 @@ module.exports = class extends Generator {
     });
   }
   configuring() {
-    let defaultSettings = this.fs.readJSON(this.templatePath('default.json'));
+    let defaultSettings = this.fs.readJSON(this.templatePath('package.json'));
     let packageInfo = {
       name: this.props.name,
       private: true,
@@ -63,19 +68,13 @@ module.exports = class extends Generator {
       main: 'src/index.js',
       scripts: defaultSettings.scripts,
       repository: this.props.repository,
-      keywords: [],
+      keywords: ['react', 'redux', 'mobx'],
       author: this.props.author,
       devDependencies: defaultSettings.devDependencies,
       dependencies: defaultSettings.dependencies
     }
-    packageInfo.dependencies = Object.assign(packageInfo.dependencies, relayOption[this.props.relay])
-    if (this.props.eslint) {
-      packageInfo.devDependencies =  Object.assign(packageInfo.devDependencies, {
-        "eslint": "^4.3.0",
-        "eslint-loader": "^1.9.0",
-        "eslint-plugin-react": "^7.1.0"
-      })
-    }
+    packageInfo.dependencies = Object.assign(packageInfo.dependencies, 
+      relayOption[this.props.relay])
     this.fs.writeJSON(this.destinationPath('package.json'), packageInfo);
   }
   writing() {
@@ -84,7 +83,7 @@ module.exports = class extends Generator {
         tPath: 'README.md',
         dPath: 'README.md',
         options: { name: this.props.name },
-        copy: true
+        copy: this.props.readme
       }, {
           tPath: 'webpack.config.js',
           dPath: 'webpack.config.js',
@@ -96,7 +95,11 @@ module.exports = class extends Generator {
       }, {
         tPath: '.eslintrc',
         dPath: '.eslintrc',
-        copy: this.props.eslint
+        copy: true
+      }, {
+        tPath: '.gitignore',
+        dPath: '.gitignore',
+        copy: this.props.gitignore
       }, {
         tPath: 'src/index.html',
         dPath: 'src/index.html',
@@ -104,30 +107,41 @@ module.exports = class extends Generator {
       }, {
         tPath: 'src/index.js',
         dPath: 'src/index.js',
-        options: { relay: this.props.relay },
+        copy: true
+      }, {
+        tPath: 'src/cfgs/dev.js',
+        dPath: 'src/cfgs/dev.js',
+        copy: true
+      }, {
+        tPath: 'src/cfgs/prod.js',
+        dPath: 'src/cfgs/prod.js',
         copy: true
       }, {
         tPath: 'src/styles/index.scss',
         dPath: 'src/styles/index.scss',
         copy: true
       }, {
-        tPath: 'src/reducer/index.js',
-        dPath: 'src/reducer/index.js',
+        tPath: 'src/reducer/README.md',
+        dPath: 'src/reducer/README.md',
         copy: this.props.relay === 'redux'
       }, {
-        tPath: 'src/actions/index.js',
-        dPath: 'src/actions/index.js',
+        tPath: 'src/actions/README.md',
+        dPath: 'src/actions/README.md',
         copy: this.props.relay === 'redux'
       }, {
-        tPath: `src/store/${this.props.relay}.js`,
-        dPath: 'src/store/index.js',
+        tPath: 'src/models/README.md',
+        dPath: 'src/models/README.md',
+        copy: this.props.relay === 'mobx'
+      }, {
+        tPath: 'src/store/README.md',
+        dPath: 'src/store/README.md',
         copy: true
       }, {
-        tPath: 'src/components/Layout.js',
-        dPath: 'src/components/Layout.js',
+        tPath: 'src/components/App.js',
+        dPath: 'src/components/App.js',
         copy: true
       }, {
-        tPath: `src/components/${this.props.relay}_home.js`,
+        tPath: `src/components/Home.js`,
         dPath: 'src/components/Home.js',
         copy: true
       }
@@ -148,12 +162,6 @@ module.exports = class extends Generator {
     })
   }
   install() {
-    this.installDependencies({
-      bower: false,
-      npm: true,
-      yarn: false
-    }, () => {
-      this.log('node_moudles is end , please run:', 'npm start');
-    });
+    this.log(chalk.yellow("Initialize the project is completed, you can choose to use NPM or YARN depend on installation"));
   }
 };

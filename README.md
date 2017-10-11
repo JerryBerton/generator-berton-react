@@ -14,13 +14,13 @@ npm install -g generator-berton-react
 
 ```bash
 yo berton-react
-npm start // 启动项目 默认端口 3000
+npm start // 启动项目 默认端口 8080
 ```
-在生成项目同时可以选择redux环境或者mobx环境。会自动生成选择的todo list的DEMO
+在生成项目同时可以选择redux或者mobx 帮你快速生成基本目录结构，并且集成antd组件库
 ## 版本介绍
 
- * react: v15.6.1
- * react-dom v15.6.1
+ * react: 16.0.0
+ * react-dom v16.0.0
  * react-router-dom v4.1.2.
 
 ## License

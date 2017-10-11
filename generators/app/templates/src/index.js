@@ -1,47 +1,26 @@
-
 import 'react-hot-loader/patch'
-import 'styles/index.scss'
+import 'styles/index.scss';
 import React from 'react'
-import { render } from 'react-dom'
-import { BrowserRouter, Route } from 'react-router-dom'
-<% if (relay === 'redux') { %>
-import { Provider } from 'react-redux'
-import store from 'store'
-<% } else if (relay === 'mobx') { %>
-import { Provider } from 'mobx-react'
-import Todo from 'store'
-<% } %>
-
-import Layout from 'components/Layout'
-import Home from 'components/Home'
-
-<% if (relay === 'redux')  { %>
-const renderApp = () => (
-  <Provider store={store}>
-    <BrowserRouter basename="/">
-      <Layout>
-        <Route path="" component={Home}/>
-      </Layout>
-    </BrowserRouter>
-  </Provider>
-)
-<% } else if (relay === 'mobx') { %>
-const renderApp = () => (
-  <Provider todo={Todo}>
-    <BrowserRouter basename="/">
-      <Layout>
-        <Route path="" component={Home}/>
-      </Layout>
-    </BrowserRouter>
-  </Provider>
-)
-<% } %>
+import ReactDOM from 'react-dom'
+import { AppContainer } from 'react-hot-loader'
+import App from 'components/App'
 
 const root = document.getElementById('root')
-render(renderApp(), root)
+
+const render = Component =>
+  ReactDOM.render(
+    <AppContainer>
+        <Component />
+    </AppContainer>,
+  root
+)
+
+
+render(App)
 
 if (module.hot) {
-  module.hot.accept(renderApp(), () => {
-    render(renderApp(), root)
+  module.hot.accept('./components/App', () => {
+    const NextRootContainer = require('./components/App').default
+    render(NextRootContainer)
   })
 }
