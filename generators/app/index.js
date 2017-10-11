@@ -2,6 +2,7 @@
 const Generator = require('yeoman-generator');
 const chalk = require('chalk');
 const yosay = require('yosay');
+const fs = require('fs')
 const relayOption = {
     mobx: {
       "mobx": "^3.3.1",
@@ -78,6 +79,9 @@ module.exports = class extends Generator {
     this.fs.writeJSON(this.destinationPath('package.json'), packageInfo);
   }
   writing() {
+    // let rootDir = this.destinationRoot()
+    // _rootDir = rootDir + '/' + this.props.name
+    // fs.mkdirSync(_rootDir);
     let list = [
       {
         tPath: 'README.md',
@@ -96,10 +100,6 @@ module.exports = class extends Generator {
         tPath: '.eslintrc',
         dPath: '.eslintrc',
         copy: true
-      }, {
-        tPath: '.gitignore',
-        dPath: '.gitignore',
-        copy: this.props.gitignore
       }, {
         tPath: 'src/index.html',
         dPath: 'src/index.html',
