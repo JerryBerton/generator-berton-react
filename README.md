@@ -16,7 +16,7 @@ npm install -g generator-berton-react
 yo berton-react
 npm start // 启动项目 默认端口 8080
 ```
-在生成项目同时可以选择redux或者mobx 帮你快速生成基本目录结构，并且集成antd组件库
+在生成项目同时可以选择redux或者mobx 帮你快速生成基本目录结构，并且集成antd组件库,随便测试一下
 ## 版本介绍
 
  * react: 16.0.0
